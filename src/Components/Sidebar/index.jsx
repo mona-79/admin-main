@@ -37,12 +37,15 @@ const Sidebar = () => {
             </div>
 
             <ul className='mt-4'>
-                <li><button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
+                <li>
+                    <Link to="/">
+                    <button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
                 font-[500] item-center !py-2 hover:!bg-[#f1f1f1]'>
                     <RxDashboard className='text-[18px]'/>
                 <span>Dashboard</span>
                 
                 </button>
+                </Link>
                 </li>
 
                 <li><button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
@@ -82,15 +85,20 @@ const Sidebar = () => {
 
                 </li>
 
-                <li><button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
+                <li>
+                    <Link to="/users">
+                    <button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
                 font-[500] item-center !py-2  hover:!bg-[#f1f1f1]'>
                     <TbUserSquareRounded className='text-[18px]'/>
                 <span>Users</span>
                 
                 </button>
+                </Link>
                 </li>
 
-                <li><button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
+                <li>
+                    
+                    <button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
                 font-[500] item-center !py-2  hover:!bg-[#f1f1f1]'onClick={()=>isOpenSubMenu(3)}>
                     <RiProductHuntLine className='text-[18px]'/>
                 <span>Products</span>
@@ -101,25 +109,32 @@ const Sidebar = () => {
                     </span> 
                 
                 </button>
+                
 
                 <Collapse isOpened={submenuIndex===3 ? true : false}>
                 <ul className='w-full'>
-                    <li className='w-full'><button className='!text-[rgba(0,0,0,0.7)] !capitalize 
+                    <li className='w-full'>
+                        <Link to="/Products">
+                        <button className='!text-[rgba(0,0,0,0.7)] !capitalize 
                     !justify-start !w-full !text-[13px] !font-[500] !pl-7 flex gap-3'>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
                         Product List
                             </button>
+                            </Link>
                    </li>
 
-                    <li className='w-full'><button className='!text-[rgba(0,0,0,0.7)] !capitalize
+                    <li className='w-full'>
+                        <Link to="/Product/upload">
+                        <button className='!text-[rgba(0,0,0,0.7)] !capitalize
                     !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
-                        Products Upload
+                        Product Upload
                             </button>
+                            </Link>
                    </li>
                </ul>
                </Collapse>
@@ -141,52 +156,64 @@ const Sidebar = () => {
 
                 <Collapse isOpened={submenuIndex===4 ? true : false}>
                 <ul className='w-full'>
-                    <li className='w-full'><button className='!text-[rgba(0,0,0,0.7)] !capitalize 
+                    <li className='w-full'>
+                        <Link to="/categories">
+                       <button className='!text-[rgba(0,0,0,0.7)] !capitalize 
                     !justify-start !w-full !text-[13px] !font-[500] !pl-7 flex gap-3'>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
                         Category List
                             </button>
+                             </Link>
                    </li>
 
-                    <li className='w-full'><button className='!text-[rgba(0,0,0,0.7)] !capitalize
+                    <li className='w-full'>
+                        <Link to="/category/add">
+                        <button className='!text-[rgba(0,0,0,0.7)] !capitalize
                     !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
                         Add a Category
                             </button>
+                            </Link>
                    </li>
 
-                   <li className='w-full'><button className='!text-[rgba(0,0,0,0.7)] !capitalize
+                   <li className='w-full'>
+                    <Link to="/category/Subcategory"><button className='!text-[rgba(0,0,0,0.7)] !capitalize
                     !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
                         Sub Category List
                             </button>
+                            </Link>
                    </li>
 
-                   <li className='w-full'><button className='!text-[rgba(0,0,0,0.7)] !capitalize
+                   <li className='w-full'>
+                    <Link to="/category/Subcategory/add"><button className='!text-[rgba(0,0,0,0.7)] !capitalize
                     !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
                         Add a Sub Category
                             </button>
+                            </Link>
                    </li>
                </ul>
                </Collapse>
 
                 </li>
 
-                <li><button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
+                <li>
+                    <Link to="/category/Subcategory/add"><button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
                 font-[500] item-center !py-2  hover:!bg-[#f1f1f1]'>
                     <IoBagCheckOutline className='text-[20px]'/>
                 <span>Orders</span>
                 
                 </button>
+                </Link>
                 </li>
 
                 <li><button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]

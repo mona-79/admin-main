@@ -18,6 +18,9 @@ function App() {
           <div className='sidebarWrapper w-[18%]'>
             <Sidebar/>
           </div>
+          <div className='contentRight py-6 px-6 w-[82%]'>
+            <Dashboard/>
+          </div>
           </div>
        </section>
        </>
