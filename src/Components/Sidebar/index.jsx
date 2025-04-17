@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 
 import { Link } from 'react-router-dom';
 import { RxDashboard } from "react-icons/rx";
@@ -10,6 +10,7 @@ import { IoBagCheckOutline } from "react-icons/io5";
 import { IoIosLogOut } from "react-icons/io";
 import { FaAngleDown } from "react-icons/fa6";
 import {Collapse} from 'react-collapse';
+import { MyContext } from '../../App';
 const Sidebar = () => {
     const [submenuIndex, setSubmenuIndex] = useState(null);
 
@@ -21,11 +22,14 @@ const Sidebar = () => {
             setSubmenuIndex(index);
         }
        
-    }  
-      return(
+    } ;
+    
+    const context = useContext(MyContext);
+      return(  
         <>
-        <div className='sidebar fixed top-0 left-0 bg-[#fff] w-[18%] h-full border-r border-[rgba(0,0,0,0.1)] 
-        py-2 px-4'>
+        <div className={`sidebar fixed top-0 left-0 bg-[#fff] h-full border-r border-[rgba(0,0,0,0.1)] 
+        py-2 px-4 transition-all duration-300 ease-in-out w-[ ${context.isSidebarOpen===true ? 'w-[18%]' : 'w-[0px]'}]`}>
+
             <div className='py-2 w-full'>
             <Link to="/">
   <img 
