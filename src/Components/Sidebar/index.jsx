@@ -28,7 +28,7 @@ const Sidebar = () => {
       return(  
         <>
         <div className={`sidebar fixed top-0 left-0 bg-[#fff] h-full border-r border-[rgba(0,0,0,0.1)] 
-        py-2 px-4 transition-all duration-300 ease-in-out w-[ ${context.isSidebarOpen===true ? 'w-[18%]' : 'w-[0px]'}]`}>
+        py-2 px-8 transition-all duration-300 ease-in-out w-[ ${context.isSidebarOpen===true ? 'w-[18%]' : 'w-[0px]'}]`}>
 
             <div className='py-2 w-full'>
             <Link to="/">

@@ -1,4 +1,4 @@
-import React, { useState } from'react';
+import React, { useState, PureComponent } from'react';
 import DashboardBoxes from '../../Components/DashboardBoxes';
 import { Button } from '@mui/material';
 import { FaPlus } from "react-icons/fa6";
@@ -11,7 +11,7 @@ import Progress from '../../Components/ProgressBar';
 import { AiOutlineEdit } from "react-icons/ai";
 import { FaRegEye } from "react-icons/fa";
 import { MdDelete } from "react-icons/md";
-import Tooltip from '@mui/material/Tooltip';
+
 import Pagination from '@mui/material/Pagination';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
@@ -22,7 +22,8 @@ import TablePagination from '@mui/material/TablePagination';
 import TableRow from '@mui/material/TableRow';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
-import { BiExport } from "react-icons/bi";
+import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
@@ -65,10 +66,86 @@ const Dashboard = () => {
             setIsOpenOrderedProduct(index);
         }
     };
-    const [page, setPage] = React.useState(0);
+const [page, setPage] = React.useState(0);
 const [rowsPerPage, setRowsPerPage] = React.useState(10);
-
 const [categoryFilterval, setcategoryFilterval] = React.useState('');
+const [chart1Data, setChart1Data] = useState( [
+  {
+    name: 'JAN',
+    TotalSales: 4000,
+    TotalUsers: 2400,
+    amt: 2400,
+  },
+  {
+    name: 'FEB',
+    TotalSales: 3000,
+    TotalUsers: 1398,
+    amt: 2210,
+  },
+  {
+    name: 'MARCH',
+    TotalSales: 2000,
+    TotalUsers: 9800,
+    amt: 2290,
+  },
+  {
+    name: 'APRIL',
+    TotalSales: 2780,
+    TotalUsers: 3908,
+    amt: 2000,
+  },
+  {
+    name: 'MAY',
+    TotalSales: 1890,
+    TotalUsers: 4800,
+    amt: 2181,
+  },
+  {
+    name: 'JUNE',
+    TotalSales: 2390,
+    TotalUsers: 3800,
+    amt: 2500,
+  },
+  {
+    name: 'JULY',
+    TotalSales: 3490,
+    TotalUsers: 4300,
+    amt: 2100,
+  },
+  
+  {
+    name: 'AUG',
+    TotalSales: 1890,
+    TotalUsers: 4800,
+    amt: 2181,
+  },
+  {
+    name: 'SEPT',
+    TotalSales: 2390,
+    TotalUsers: 3800,
+    amt: 2500,
+  },
+  {
+    name: 'OCT',
+    TotalSales: 3490,
+    TotalUsers: 4300,
+    amt: 2100,
+  },
+
+  
+{
+  name: 'NOV',
+  TotalSales: 6890,
+  TotalUsers: 4800,
+  amt: 2181,
+},
+{
+  name: 'DEC',
+  TotalSales: 2390,
+  TotalUsers: 3800,
+  amt: 2500,
+},
+]);
 
   const handleChangeCatFilter = (event) => {
     setcategoryFilterval(event.target.value);
@@ -82,6 +159,11 @@ const handleChangeRowsPerPage = (event) => {
   setRowsPerPage(+event.target.value);
   setPage(0);
 };
+
+
+
+
+
     return(
         <>
         <div className='w-full py-2 px-5 border bg-white border-[rgba(0,0,0,0.1)] flex items-center gap-8 mb-5 justify-between rounded-md'>
@@ -218,22 +300,384 @@ const handleChangeRowsPerPage = (event) => {
                         </td>
                         <td className="px-6 py-2">
   <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+  <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
       <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
     </button>
-    </Tooltip>
 
-    <Tooltip title="View Product Details" placement="top"> 
+    
     <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
       <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
     </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
+    
     <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
       <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
     </button>
-    </Tooltip>
+
+  </div>
+</td>
+
+
+
+                    </tr>
+                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
+                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
+                        <td  className="px-0 pr-0 py-2">
+                        <div className='w-[60px]'>
+                  <Checkbox {...label}  size="small" />
+                  </div>
+                        </td>
+                        <td  className="px-2 py-2">
+                            <div className='flex items-center gap-4 w-[300px]'>
+                                
+                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
+                                <Link to="/product/45745">
+                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
+                                 className='w-full group-hover:scale-105 transition-all'
+                                 />
+                                 </Link>
+                                 
+                                 </div>
+                                 <div className='info w-[75%]'>
+
+                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
+                                        <Link to="/product/45745">
+                                        
+                                        Vitamin C Serum for Face with Mandarin
+                                        </Link>
+                                        </h3>
+                                    <span className='text-[12px]'>
+                                        Beauty Product
+                                    </span>
+                                 </div>
+                            </div>
+                        </td>
+                        <td  className="px-6 py-2">
+                            Beauty 
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            Women
+
+                        </td>
+                        
+                        <td  className="px-6 py-2">
+                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
+                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
+                         text-[14px] font-[600]">  $58.00 </span> </div>
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
+                            <Progress value={80} type='success' />
+
+                        </td>
+                        <td className="px-6 py-2">
+  <div className='flex items-center gap-1'>
+  <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
+    </button>
+
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+
+  </div>
+</td>
+
+
+
+                    </tr>
+                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
+                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
+                        <td  className="px-0 pr-0 py-2">
+                        <div className='w-[60px]'>
+                  <Checkbox {...label}  size="small" />
+                  </div>
+                        </td>
+                        <td  className="px-2 py-2">
+                            <div className='flex items-center gap-4 w-[300px]'>
+                                
+                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
+                                <Link to="/product/45745">
+                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
+                                 className='w-full group-hover:scale-105 transition-all'
+                                 />
+                                 </Link>
+                                 
+                                 </div>
+                                 <div className='info w-[75%]'>
+
+                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
+                                        <Link to="/product/45745">
+                                        
+                                        Vitamin C Serum for Face with Mandarin
+                                        </Link>
+                                        </h3>
+                                    <span className='text-[12px]'>
+                                        Beauty Product
+                                    </span>
+                                 </div>
+                            </div>
+                        </td>
+                        <td  className="px-6 py-2">
+                            Beauty 
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            Women
+
+                        </td>
+                        
+                        <td  className="px-6 py-2">
+                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
+                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
+                         text-[14px] font-[600]">  $58.00 </span> </div>
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
+                            <Progress value={80} type='success' />
+
+                        </td>
+                        <td className="px-6 py-2">
+  <div className='flex items-center gap-1'>
+  <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
+    </button>
+
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+
+  </div>
+</td>
+
+
+
+                    </tr>
+                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
+                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
+                        <td  className="px-0 pr-0 py-2">
+                        <div className='w-[60px]'>
+                  <Checkbox {...label}  size="small" />
+                  </div>
+                        </td>
+                        <td  className="px-2 py-2">
+                            <div className='flex items-center gap-4 w-[300px]'>
+                                
+                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
+                                <Link to="/product/45745">
+                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
+                                 className='w-full group-hover:scale-105 transition-all'
+                                 />
+                                 </Link>
+                                 
+                                 </div>
+                                 <div className='info w-[75%]'>
+
+                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
+                                        <Link to="/product/45745">
+                                        
+                                        Vitamin C Serum for Face with Mandarin
+                                        </Link>
+                                        </h3>
+                                    <span className='text-[12px]'>
+                                        Beauty Product
+                                    </span>
+                                 </div>
+                            </div>
+                        </td>
+                        <td  className="px-6 py-2">
+                            Beauty 
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            Women
+
+                        </td>
+                        
+                        <td  className="px-6 py-2">
+                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
+                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
+                         text-[14px] font-[600]">  $58.00 </span> </div>
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
+                            <Progress value={80} type='success' />
+
+                        </td>
+                        <td className="px-6 py-2">
+  <div className='flex items-center gap-1'>
+  <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
+    </button>
+
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+
+  </div>
+</td>
+
+
+
+                    </tr>
+                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
+                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
+                        <td  className="px-0 pr-0 py-2">
+                        <div className='w-[60px]'>
+                  <Checkbox {...label}  size="small" />
+                  </div>
+                        </td>
+                        <td  className="px-2 py-2">
+                            <div className='flex items-center gap-4 w-[300px]'>
+                                
+                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
+                                <Link to="/product/45745">
+                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
+                                 className='w-full group-hover:scale-105 transition-all'
+                                 />
+                                 </Link>
+                                 
+                                 </div>
+                                 <div className='info w-[75%]'>
+
+                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
+                                        <Link to="/product/45745">
+                                        
+                                        Vitamin C Serum for Face with Mandarin
+                                        </Link>
+                                        </h3>
+                                    <span className='text-[12px]'>
+                                        Beauty Product
+                                    </span>
+                                 </div>
+                            </div>
+                        </td>
+                        <td  className="px-6 py-2">
+                            Beauty 
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            Women
+
+                        </td>
+                        
+                        <td  className="px-6 py-2">
+                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
+                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
+                         text-[14px] font-[600]">  $58.00 </span> </div>
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
+                            <Progress value={80} type='success' />
+
+                        </td>
+                        <td className="px-6 py-2">
+  <div className='flex items-center gap-1'>
+  <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
+    </button>
+
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+
+  </div>
+</td>
+
+
+
+                    </tr>
+                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
+                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
+                        <td  className="px-0 pr-0 py-2">
+                        <div className='w-[60px]'>
+                  <Checkbox {...label}  size="small" />
+                  </div>
+                        </td>
+                        <td  className="px-2 py-2">
+                            <div className='flex items-center gap-4 w-[300px]'>
+                                
+                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
+                                <Link to="/product/45745">
+                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
+                                 className='w-full group-hover:scale-105 transition-all'
+                                 />
+                                 </Link>
+                                 
+                                 </div>
+                                 <div className='info w-[75%]'>
+
+                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
+                                        <Link to="/product/45745">
+                                        
+                                        Vitamin C Serum for Face with Mandarin
+                                        </Link>
+                                        </h3>
+                                    <span className='text-[12px]'>
+                                        Beauty Product
+                                    </span>
+                                 </div>
+                            </div>
+                        </td>
+                        <td  className="px-6 py-2">
+                            Beauty 
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            Women
+
+                        </td>
+                        
+                        <td  className="px-6 py-2">
+                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
+                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
+                         text-[14px] font-[600]">  $58.00 </span> </div>
+
+                        </td>
+                        <td  className="px-6 py-2">
+                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
+                            <Progress value={80} type='success' />
+
+                        </td>
+                        <td className="px-6 py-2">
+  <div className='flex items-center gap-1'>
+  <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
+    </button>
+
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+    
+    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
+    </button>
+
   </div>
 </td>
 
@@ -241,382 +685,6 @@ const handleChangeRowsPerPage = (event) => {
 
                     </tr>
 
-                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
-                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
-                        <td  className="px-0 pr-0 py-2">
-                        <div className='w-[60px]'>
-                  <Checkbox {...label}  size="small" />
-                  </div>
-                        </td>
-                        <td  className="px-2 py-2">
-                            <div className='flex items-center gap-4 w-[300px]'>
-                                
-                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
-                                <Link to="/product/45745">
-                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
-                                 className='w-full group-hover:scale-105 transition-all'
-                                 />
-                                 </Link>
-                                 
-                                 </div>
-                                 <div className='info w-[75%]'>
-
-                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
-                                        <Link to="/product/45745">
-                                        
-                                        Vitamin C Serum for Face with Mandarin
-                                        </Link>
-                                        </h3>
-                                    <span className='text-[12px]'>
-                                        Beauty Product
-                                    </span>
-                                 </div>
-                            </div>
-                        </td>
-                        <td  className="px-6 py-2">
-                            Beauty 
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            Women
-
-                        </td>
-                        
-                        <td  className="px-6 py-2">
-                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
-                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
-                         text-[14px] font-[600]">  $58.00 </span> </div>
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
-                            <Progress value={80} type='success' />
-
-                        </td>
-                        <td className="px-6 py-2">
-  <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
-    </button>
-    </Tooltip>
-
-    <Tooltip title="View Product Details" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-  </div>
-</td>
-               </tr>
-
-                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
-                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
-                        <td  className="px-0 pr-0 py-2">
-                        <div className='w-[60px]'>
-                  <Checkbox {...label}  size="small" />
-                  </div>
-                        </td>
-                        <td  className="px-2 py-2">
-                            <div className='flex items-center gap-4 w-[300px]'>
-                                
-                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
-                                <Link to="/product/45745">
-                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
-                                 className='w-full group-hover:scale-105 transition-all'
-                                 />
-                                 </Link>
-                                 
-                                 </div>
-                                 <div className='info w-[75%]'>
-
-                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
-                                        <Link to="/product/45745">
-                                        
-                                        Vitamin C Serum for Face with Mandarin
-                                        </Link>
-                                        </h3>
-                                    <span className='text-[12px]'>
-                                        Beauty Product
-                                    </span>
-                                 </div>
-                            </div>
-                        </td>
-                        <td  className="px-6 py-2">
-                            Beauty 
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            Women
-
-                        </td>
-                        
-                        <td  className="px-6 py-2">
-                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
-                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
-                         text-[14px] font-[600]">  $58.00 </span> </div>
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
-                            <Progress value={80} type='success' />
-
-                        </td>
-                        <td className="px-6 py-2">
-  <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
-    </button>
-    </Tooltip>
-
-    <Tooltip title="View Product Details" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-  </div>
-</td>
-
-
-
-                    </tr>
-
-                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
-                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
-                        <td  className="px-0 pr-0 py-2">
-                        <div className='w-[60px]'>
-                  <Checkbox {...label}  size="small" />
-                  </div>
-                        </td>
-                        <td  className="px-2 py-2">
-                            <div className='flex items-center gap-4 w-[300px]'>
-                                
-                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
-                                <Link to="/product/45745">
-                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
-                                 className='w-full group-hover:scale-105 transition-all'
-                                 />
-                                 </Link>
-                                 
-                                 </div>
-                                 <div className='info w-[75%]'>
-
-                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
-                                        <Link to="/product/45745">
-                                        
-                                        Vitamin C Serum for Face with Mandarin
-                                        </Link>
-                                        </h3>
-                                    <span className='text-[12px]'>
-                                        Beauty Product
-                                    </span>
-                                 </div>
-                            </div>
-                        </td>
-                        <td  className="px-6 py-2">
-                            Beauty 
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            Women
-
-                        </td>
-                        
-                        <td  className="px-6 py-2">
-                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
-                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
-                         text-[14px] font-[600]">  $58.00 </span> </div>
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
-                            <Progress value={80} type='success' />
-
-                        </td>
-                        <td className="px-6 py-2">
-  <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
-    </button>
-    </Tooltip>
-
-    <Tooltip title="View Product Details" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-  </div>
-</td>
-      </tr>
-
-                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
-                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
-                        <td  className="px-0 pr-0 py-2">
-                        <div className='w-[60px]'>
-                  <Checkbox {...label}  size="small" />
-                  </div>
-                        </td>
-                        <td  className="px-2 py-2">
-                            <div className='flex items-center gap-4 w-[300px]'>
-                                
-                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
-                                <Link to="/product/45745">
-                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
-                                 className='w-full group-hover:scale-105 transition-all'
-                                 />
-                                 </Link>
-                                 
-                                 </div>
-                                 <div className='info w-[75%]'>
-
-                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
-                                        <Link to="/product/45745">
-                                        
-                                        Vitamin C Serum for Face with Mandarin
-                                        </Link>
-                                        </h3>
-                                    <span className='text-[12px]'>
-                                        Beauty Product
-                                    </span>
-                                 </div>
-                            </div>
-                        </td>
-                        <td  className="px-6 py-2">
-                            Beauty 
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            Women
-
-                        </td>
-                        
-                        <td  className="px-6 py-2">
-                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
-                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
-                         text-[14px] font-[600]">  $58.00 </span> </div>
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
-                            <Progress value={80} type='success' />
-
-                        </td>
-                        <td className="px-6 py-2">
-  <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
-    </button>
-    </Tooltip>
-
-    <Tooltip title="View Product Details" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-  </div>
-</td>
-
-
-
-                    </tr>
-
-                    <tr className='odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50
-                     even:dark:bg-gray-800 border-b dark:border-gray-700 '>
-                        <td  className="px-0 pr-0 py-2">
-                        <div className='w-[60px]'>
-                  <Checkbox {...label}  size="small" />
-                  </div>
-                        </td>
-                        <td  className="px-2 py-2">
-                            <div className='flex items-center gap-4 w-[300px]'>
-                                
-                                <div className='img w-[55px] h-[55px] rounded-md overflow-hidden group'>
-                                <Link to="/product/45745">
-                                    <img src='https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481'
-                                 className='w-full group-hover:scale-105 transition-all'
-                                 />
-                                 </Link>
-                                 
-                                 </div>
-                                 <div className='info w-[75%]'>
-
-                                    <h3 className='font-[600] text-[12px] leading-4 hover:text-blue-600'>
-                                        <Link to="/product/45745">
-                                        
-                                        Vitamin C Serum for Face with Mandarin
-                                        </Link>
-                                        </h3>
-                                    <span className='text-[12px]'>
-                                        Beauty Product
-                                    </span>
-                                 </div>
-                            </div>
-                        </td>
-                        <td  className="px-6 py-2">
-                            Beauty 
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            Women
-
-                        </td>
-                        
-                        <td  className="px-6 py-2">
-                        <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
-                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
-                         text-[14px] font-[600]">  $58.00 </span> </div>
-
-                        </td>
-                        <td  className="px-6 py-2">
-                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
-                            <Progress value={80} type='success' />
-
-                        </td>
-                        <td className="px-6 py-2">
-  <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
-    </button>
-    </Tooltip>
-
-    <Tooltip title="View Product Details" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-  </div>
-</td>
-                    </tr>
-                  
 
                 </tbody>
               </table>
@@ -724,22 +792,16 @@ const handleChangeRowsPerPage = (event) => {
           </TableCell>
           <TableCell style={{ minWidth: columns.minWidth}}>
           <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+          <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
       <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
     </button>
-    </Tooltip>
 
-    <Tooltip title="View Product Details" placement="top"> 
     <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
       <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
     </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
     <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
       <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
     </button>
-    </Tooltip>
   </div>
           </TableCell>
 
@@ -778,134 +840,22 @@ const handleChangeRowsPerPage = (event) => {
           </TableCell>
           <TableCell style={{ minWidth: columns.minWidth}}>
           <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
+          <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
       <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
     </button>
-    </Tooltip>
 
-    <Tooltip title="View Product Details" placement="top"> 
     <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
       <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
     </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
     <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
       <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
     </button>
-    </Tooltip>
   </div>
           </TableCell>
 
           </TableRow>
 
-          <TableRow >
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <Checkbox {...label} size="small" />
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <div className="flex items-center gap-4 w-[300px]">
-            <div className="img w-[55px] h-[55px] rounded-md overflow-hidden group">
-                <Link to="/product/45745">
-                <img 
-                 src="https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481"
-                 className="w-full group-hover:scale-105 transition-all"/>
-                    </Link></div><div className="info w-[75%]">
-                        <h3 className="font-[600] text-[12px] leading-4 hover:text-blue-600">
-                            <a href="/product/45745">Vitamin C Serum for Face with Mandarin</a>
-                            </h3><span className="text-[12px]">Beauty Product</span></div></div>
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          Beauty
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-           Women
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
-                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
-                         text-[14px] font-[600]">  $58.00 </span> </div>
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
-          <Progress value={80} type='warning' />
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
-    </button>
-    </Tooltip>
-
-    <Tooltip title="View Product Details" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-  </div>
-          </TableCell>
-
-          </TableRow>
-
-          <TableRow >
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <Checkbox {...label} size="small" />
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <div className="flex items-center gap-4 w-[300px]">
-            <div className="img w-[55px] h-[55px] rounded-md overflow-hidden group">
-                <Link to="/product/45745">
-                <img 
-                 src="https://plumgoodness.com/cdn/shop/files/001_9013bf85-0761-4afd-80a3-878cf4665ce5.jpg?v=1735905481"
-                 className="w-full group-hover:scale-105 transition-all"/>
-                    </Link></div><div className="info w-[75%]">
-                        <h3 className="font-[600] text-[12px] leading-4 hover:text-blue-600">
-                            <a href="/product/45745">Vitamin C Serum for Face with Mandarin</a>
-                            </h3><span className="text-[12px]">Beauty Product</span></div></div>
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          Beauty
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-           Women
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <div className="flex  gap-1 flex-col"> <span className="oldPrice line-through leading-3
-                         text-gray-500 text-[14px] font-[500]"> $68.00 </span> <span className="price text-blue-600 
-                         text-[14px] font-[600]">  $58.00 </span> </div>
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
-          <Progress value={80} type='warning' />
-          </TableCell>
-          <TableCell style={{ minWidth: columns.minWidth}}>
-          <div className='flex items-center gap-1'>
-  <Tooltip title="Edit Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
-    </button>
-    </Tooltip>
-
-    <Tooltip title="View Product Details" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-    <Tooltip title="Remove Product" placement="top"> 
-    <button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-      <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-    </button>
-    </Tooltip>
-  </div>
-          </TableCell>
-
-          </TableRow>
+         
             
           </TableBody>
         </Table>
@@ -918,10 +868,7 @@ const handleChangeRowsPerPage = (event) => {
         page={page}
         onPageChange={handleChangePage}
         onRowsPerPageChange={handleChangeRowsPerPage}
-      />
-
-
-           
+      />   
             
         </div>
 
@@ -1234,17 +1181,52 @@ const handleChangeRowsPerPage = (event) => {
 
                 </tbody>
               </table>
-            </div>
-
-
-
-            
+            </div>          
         </div>
 
+        <div className='card my-4 shadow-md sm:rounded-lg bg-white'>
+          <div className='flex items-center justify-betweenpx-5 py-5 px-6 pb-0'>
+        <h2 className='text-[18px] font-[600]'>Total Users & Total Sales</h2>
+        </div>
 
+        <div className='flex items-center gap-5  py-5 px-6 pt-1'>
+        <span className='flex items-center gap-1 text-[15px]'>
+        <span className='block w-[8px] h-[8px] rounded-full bg-green-600'>
+          </span>Total Users</span>
 
+          <span className='flex items-center gap-1 text-[15px]'>
+        <span className='block w-[8px] h-[8px] rounded-full bg-blue-600'>
+          </span>Total Sales</span>
 
-
+          
+        </div>
+        <LineChart
+          width={1000}
+          height={500}
+          data={chart1Data}
+          margin={{
+            top: 5,
+            right: 30,
+            left: 20,
+            bottom: 5,
+          }}
+        >
+          <CartesianGrid strokeDasharray="3 3" stroke='none' />
+          <XAxis dataKey="name" tick={{ fontSize: 10 }} />
+          <YAxis tick={{ fontSize: 10 }}/>
+          <Tooltip />
+          <Legend />
+          <Line type="monotone" 
+          dataKey="TotalSales" 
+          stroke="#8884d8" 
+          strokeWidth={3}
+          activeDot={{ r: 8 }} 
+          />
+          <Line type="monotone" dataKey="TotalUsers"
+           stroke="#82ca9d"
+           strokeWidth={3} />
+        </LineChart>
+        </div>
         </>
     );
 };
