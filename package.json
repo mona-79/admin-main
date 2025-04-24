@@ -18,6 +18,11 @@
     "react-collapse": "^5.1.1",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
+<<<<<<< HEAD
+=======
+    "react-lazy-load-image-component": "^1.6.3",
+    "react-router-dom": "^7.5.1",
+>>>>>>> fbced8d (Update entire project with latest changes)
     "recharts": "^2.15.3",
     "swiper": "^11.2.6",
     "tailwindcss": "^4.1.3"

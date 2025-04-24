@@ -52,12 +52,16 @@ const Header = () => {
             <FaRegBell />
           </StyledBadge>
         </IconButton>
-        <div className='relative'>
+        {
+          context.isLogin === true ?
+
+          <div className='relative'>
 
         <div className='rounded-full w-[35px] h-[35px] overflow-hidden cursor-pointer' onClick={handleClickMyAcc}>
             <img src='https://static.vecteezy.com/system/resources/thumbnails/041/880/991/small_2x/ai-generated-pic-artistic-depiction-of-sunflowers-under-a-vast-cloudy-sky-photo.jpg' className='w-full h-full object-cover'/>
 
         </div>
+        
 
         <Menu
         anchorEl={anchorMyAcc}
@@ -125,6 +129,12 @@ const Header = () => {
       </Menu>
     
         </div>
+
+
+         :
+           <button className='btn-blue btn-sm !rounded-full'>Sign In</button>
+        }
+        
       </div>
     </header>
   );

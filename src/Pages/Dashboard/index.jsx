@@ -1,4 +1,4 @@
-import React, { useState, PureComponent } from'react';
+import React, { useState, PureComponent, useContext } from'react';
 import DashboardBoxes from '../../Components/DashboardBoxes';
 import { Button } from '@mui/material';
 import { FaPlus } from "react-icons/fa6";
@@ -23,6 +23,7 @@ import TableRow from '@mui/material/TableRow';
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { MyContext } from '../../App';
 
 
 const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
@@ -147,6 +148,8 @@ const [chart1Data, setChart1Data] = useState( [
 },
 ]);
 
+ const context = useContext(MyContext);
+
   const handleChangeCatFilter = (event) => {
     setcategoryFilterval(event.target.value);
   };
@@ -174,10 +177,13 @@ const handleChangeRowsPerPage = (event) => {
                 <p>Here's What happening on your store today. See the statistics at once.</p>
                 <br/>
 
-                <button className='bg-blue-600 text-white px-4 py-2 rounded-md flex items-center gap-2 transition-colors duration-300 hover:bg-blue-700 hover:shadow-md'>
-  <FaPlus className="text-sm" />
-  Add Products
-</button>
+                <Button className='btn-blue !capitalize' onClick={()=> context.setIsOpenFullScreenPanel({
+                        open:true,
+                        model:'Add Product'
+                     })}>
+  <FaPlus />
+  Add Product
+</Button>
             </div>
             <img src="https://img.freepik.com/premium-vector/illustration-cash-delivery_108061-2040.jpg "className='w-[300px]'/>
         </div>
@@ -215,10 +221,13 @@ const handleChangeRowsPerPage = (event) => {
         </Select>
               </div>
               <div className='col w-[25%] ml-auto flex items-center gap-3'>
-                <button className='btn px-4 py-2 rounded-md !bg-green-600 !text-white btn-sm font-medium hover:bg-green-700 transition'>
-                  Export</button>
-                <button className='btn-blue px-4 py-2 rounded-md !text-white btn-sm font-medium hover:bg-green-700 transition'>
-                  Add Products</button>
+                <Button className='btn  !bg-green-600 !text-white btn-sm '>
+                  Export</Button>
+                <Button className='btn-blue  !text-white btn-sm' onClick={()=> context.setIsOpenFullScreenPanel({
+                        open:true,
+                        model:'Add Product'
+                     })}>
+                  Add Product</Button>
               </div>
              </div>
 
@@ -294,7 +303,8 @@ const handleChangeRowsPerPage = (event) => {
 
                         </td>
                         <td  className="px-6 py-2">
-                            <p className='text-[14px] w-[100px]'><span className='font-[600]'>234</span> sale</p>
+                            <p className='text-[14px] w-[100px]'>
+                              <span className='font-[600]'>234</span> sale</p>
                             <Progress value={80} type='success' />
 
                         </td>
@@ -729,10 +739,13 @@ const handleChangeRowsPerPage = (event) => {
         </Select>
               </div>
               <div className='col w-[25%] ml-auto flex items-center gap-3'>
-                <button className='btn px-4 py-2 rounded-md !bg-green-600 !text-white btn-sm font-medium hover:bg-green-700 transition'>
-                  Export</button>
-                <button className='btn-blue px-4 py-2 rounded-md !text-white btn-sm font-medium hover:bg-green-700 transition'>
-                  Add Products</button>
+                <Button className='btn  !bg-green-600 !text-white btn-sm '>
+                  Export</Button>
+                <Button className='btn-blue  !text-white btn-sm ' onClick={()=> context.setIsOpenFullScreenPanel({
+                        open:true,
+                        model:'Add Product'
+                     })}>
+                  Add Product</Button>
               </div>
              </div>
              <br/>
