@@ -41,7 +41,7 @@ const Header = () => {
 
 
       <div className='part1'>
-        <Button className='!w-[40px] !h-[40px] !rounded-full !min-w-[40px] !text-[rgba(0,0,0,0.8)]' onClick = {() => context.setisSidebarOpen(!context.isSidebarOpen)}>
+        <Button className='!w-[40px] !h-[40px] !rounded-full !min-w-[40px] !text-[rgba(0,0,0,0.8)]' onClick = {() => context.setIsSidebarOpen(!context.isSidebarOpen)}>
           <RiMenu2Line className='text-[18px] text-[rgba(0,0,0,0.8)]' />
         </Button>
       </div>
@@ -132,7 +132,7 @@ const Header = () => {
 
 
          :
-           <button className='btn-blue btn-sm !rounded-full'>Sign In</button>
+           <Button className='btn-blue btn-sm !rounded-full'>Sign In</Button>
         }
         
       </div>

@@ -212,7 +212,7 @@ const AddProduct = () => {
            </div>
          </div>
 
-         <div className='col w-full p-5'>
+         <div className='col w-full p-5 px-0'>
             <h3 className='font-[700] text-[18px] mb-3'>Media & Images</h3>
 
                  

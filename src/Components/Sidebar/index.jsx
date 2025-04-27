@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-
+import { Button } from '@mui/material'; 
 import { Link } from 'react-router-dom';
 import { RxDashboard } from "react-icons/rx";
 import { IoMdImages } from "react-icons/io";
@@ -165,49 +165,65 @@ const Sidebar = () => {
                 <Collapse isOpened={submenuIndex===4 ? true : false}>
                 <ul className='w-full'>
                     <li className='w-full'>
-                        <Link to="/categories">
+                        <Link to="/category/list">
+                    
                        <button className='!text-[rgba(0,0,0,0.7)] !capitalize 
                     !justify-start !w-full !text-[13px] !font-[500] !pl-7 flex gap-3'>
+                   
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
-                    </span>
+                    </span>{" "}
                         Category List
                             </button>
-                             </Link>
+                            </Link>
+                             
                    </li>
 
                     <li className='w-full'>
-                        <Link to="/category/add">
+                    
                         <button className='!text-[rgba(0,0,0,0.7)] !capitalize
-                    !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'>
+                    !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'
+                     onClick={() =>
+                        context.setIsOpenFullScreenPanel({
+                          open: true,
+                          model: 'Add New Category',
+                        })
+                      }>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
                         Add a Category
                             </button>
-                            </Link>
+                            
                    </li>
 
                    <li className='w-full'>
-                    <Link to="/category/Subcategory"><button className='!text-[rgba(0,0,0,0.7)] !capitalize
-                    !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'>
+                   <Link to="/subCategory/list">
+                    <button className='!text-[rgba(0,0,0,0.7)] !capitalize
+                    !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'
+                    >
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
                         Sub Category List
                             </button>
-                            </Link>
+                            </Link>  
                    </li>
 
                    <li className='w-full'>
-                    <Link to="/category/Subcategory/add"><button className='!text-[rgba(0,0,0,0.7)] !capitalize
-                    !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'>
+                    
+                    <button className='!text-[rgba(0,0,0,0.7)] !capitalize
+                    !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'
+                    onClick={() => context.setIsOpenFullScreenPanel({
+                        open: true,
+                        model: 'Add New Sub Category'  // <-- Yahan "Add Product" ki jagah "Add Category"
+                      })}>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
                         Add a Sub Category
                             </button>
-                            </Link>
+                           
                    </li>
                </ul>
                </Collapse>
@@ -215,7 +231,7 @@ const Sidebar = () => {
                 </li>
 
                 <li>
-                    <Link to="/category/Subcategory/add"><button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
+                    <Link to="/orders"><button className='w-full !capitalize justify-start flex gap-3 text-[14px] text-[rgba(0,0,0,0.8)]
                 font-[500] item-center !py-2  hover:!bg-[#f1f1f1]'>
                     <IoBagCheckOutline className='text-[20px]'/>
                 <span>Orders</span>
@@ -242,3 +258,5 @@ const Sidebar = () => {
     )
 }
 export default Sidebar;
+
+
