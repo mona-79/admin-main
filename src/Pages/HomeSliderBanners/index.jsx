@@ -35,15 +35,15 @@ const columns = [
   ];
 
 
-const HomeSliderBanners = () => {
-    const [categoryFilterval, setcategoryFilterval] = React.useState('');
+export const HomeSliderBanners = () => {
+    const [categoryFilterval, setCategoryFilterval] = React.useState('');
     const [page, setPage] = React.useState(0);
     const [rowsPerPage, setRowsPerPage] = React.useState(10);
 
     const context = useContext(MyContext);
     
     const handleChangeCatFilter = (event) => {
-        setcategoryFilterval(event.target.value);
+        setCategoryFilterval(event.target.value);
       };
       const handleChangeRowsPerPage = (event) => {
         setRowsPerPage(+event.target.value);

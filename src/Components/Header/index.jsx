@@ -1,6 +1,5 @@
 import React,{useState, useContext} from 'react';
 import Button from '@mui/material/Button';
-import { RiMenu2Line } from "react-icons/ri";
 import { styled } from '@mui/material/styles';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge'; // ✅ Import Badge
@@ -11,6 +10,7 @@ import Divider from '@mui/material/Divider';
 import { FaRegUser } from "react-icons/fa6";
 import { IoMdLogOut } from "react-icons/io";
 import { MyContext } from "../../App";
+import { NavLink } from 'react-router-dom';
 
 const StyledBadge = styled(Badge)(({ theme }) => ({
   '& .MuiBadge-badge': {
@@ -26,9 +26,9 @@ const Header = () => {
 
     const openMyAcc = Boolean(anchorMyAcc);
     const handleClickMyAcc = (event) => {
-        setAnchorMyAcc(event.currentTarget)
-        +1;
-    };
+      setAnchorMyAcc(event.currentTarget);
+  };
+  
     const handleCloseMyAcc = () => {
         setAnchorMyAcc(null);
     };
@@ -41,9 +41,6 @@ const Header = () => {
 
 
       <div className='part1'>
-        <Button className='!w-[40px] !h-[40px] !rounded-full !min-w-[40px] !text-[rgba(0,0,0,0.8)]' onClick = {() => context.setIsSidebarOpen(!context.isSidebarOpen)}>
-          <RiMenu2Line className='text-[18px] text-[rgba(0,0,0,0.8)]' />
-        </Button>
       </div>
 
       <div className='part2 w-[40%] flex items-center justify-end gap-5'>
@@ -132,7 +129,10 @@ const Header = () => {
 
 
          :
-           <Button className='btn-blue btn-sm !rounded-full'>Sign In</Button>
+         <NavLink to ="/login" exact={true} activeClassName="isActive">
+           <Button className='btn-blue btn-sm !rounded-full'
+           >Sign In</Button>
+           </NavLink>
         }
         
       </div>

@@ -141,9 +141,7 @@ export const SubCategoryList = () => {
         <AiOutlineEdit className='text-[rgba(0,0,0,0.7)] text-[20px]  ' />
       </Button>
   
-      <Button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
-        <FaRegEye className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
-      </Button>
+     
       <Button className='!w-[35px] !h-[35px] bg-[#f1f1f1] !border !border-[rgba(0,0,0,0.1)]  rounded-full flex items-center justify-center hover:bg-blue-200 transition-all duration-200' styles={{minWidth: "35px"}}>
         <MdDelete className='text-[rgba(0,0,0,0.7)] text-[18px]  ' />
       </Button>

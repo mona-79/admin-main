@@ -33,7 +33,7 @@ const Sidebar = () => {
             <div className='py-2 w-full'>
             <Link to="/">
   <img 
-    src="/tikishnutra_resized.jpeg" 
+    src="/logo.png" 
     className="w-[120px]" 
   />
 </Link>
@@ -66,17 +66,24 @@ const Sidebar = () => {
 
                 <Collapse isOpened={submenuIndex===1 ? true : false}>
                 <ul className='w-full'>
-                    <li className='w-full'><button className='!text-[rgba(0,0,0,0.7)] !capitalize 
+                    <li className='w-full'>
+                        <Link to= '/homeSlider/list'><button className='!text-[rgba(0,0,0,0.7)] !capitalize 
                     !justify-start !w-full !text-[13px] !font-[500] !pl-7 flex gap-3'>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>
                         Home Banners List
                             </button>
+                            </Link>
                    </li>
 
-                    <li className='w-full'><button className='!text-[rgba(0,0,0,0.7)] !capitalize
-                    !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'>
+                    <li className='w-full'>
+                        <button className='!text-[rgba(0,0,0,0.7)] !capitalize
+                    !justify-start !w-full !text-[13px] !font-[500]  !pl-7 flex gap-3'
+                    onClick={()=> context.setIsOpenFullScreenPanel({
+                        open:true,
+                        model:'Add Home Slide'
+                     })}>
                         <span className='block w-[5px] h-[5px] rounded-full bg-[rgba(0,0,0,0.2)]'>
 
                     </span>

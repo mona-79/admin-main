@@ -39,11 +39,10 @@ const MyContext = createContext();
 function App() {
   const [isSidebarOpen, setIsSidebarOpen] = useState(true);
   const [isLogin, setIsLogin] = useState(false);
-
-  const [isOpenFullScreenPanel, setIsOpenFullScreenPanel]= useState(
-    {open:false,
-  model:''}
-);
+  const [isOpenFullScreenPanel, setIsOpenFullScreenPanel] = useState({
+    open: false,
+    model: '',
+  });
 
   const router = createBrowserRouter([
     {
@@ -53,7 +52,7 @@ function App() {
           <Header />
           <div className="contentMain flex">
             <div className={`overflow-hidden sidebarWrapper  ${
-              isSidebarOpen===true ? 'w-[18%]' : 'w-0px opacity-0' } transition-all`}
+              isSidebarOpen===true ? 'w-[18%]' : 'w-0 opacity-0' } transition-all`}
           >
             <Sidebar />
           </div>

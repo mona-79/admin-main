@@ -51,7 +51,8 @@ export const AddCategory = () => {
                             <UploadBox multiple={true}/>
                         </div>
                     </div>
-                    
+                    <br/>
+                      <br/>
                       <div className='w-[250px]'>
                          <Button type='button' className='btn-blue btn-lg w-full flex gap-2 !min-w-[150px]'>
                           <IoCloudUpload className='text-[25px] text-white'/>Publish and View</Button>

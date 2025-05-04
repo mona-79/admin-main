@@ -4,7 +4,7 @@ import { FaImage } from "react-icons/fa6";
 const UploadBox = (props) => {
   return (
     <div className='uploadBox p-3 rounded-md overflow-hidden border border-dashed
-     border-[rgba(0,0,0,0.3)] h-[150px] w-[170px] bg-gray-100 cursor-pointer hover:bg-gray-200 
+     border-[rgba(0,0,0,0.3)] h-[150px] w-[100%] bg-gray-100 cursor-pointer hover:bg-gray-200 
      flex items-center justify-center flex-col relative'>
         <FaImage className='text-[40px] opacity-35 pointer-events-none'/>
             <h4 className='font-[14px] pointer-events-none'>Image Upload</h4>

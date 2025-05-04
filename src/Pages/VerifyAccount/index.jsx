@@ -18,7 +18,7 @@ import OtpBox from '../../Components/OtpBox';
     <section className=' bg-white w-full h-[100vh] '>
         <header className='w-full fixed top-0 left-0 px-4 py-3 flex items-start justify-between z-50'>
             <Link to= "/">
-            <img src="/tikishnutra_resized.jpeg" className='w-[200px]'/></Link>
+            <img src="/logo.png" className='w-[200px]'/></Link>
        
        <div className='flex items-center gap-0'>
         <NavLink to="/login" exact={true} activeClassName="isActive">
@@ -32,7 +32,7 @@ import OtpBox from '../../Components/OtpBox';
             </NavLink>
             </div>
         </header>
-        <img src="/tikishnutra_resized.jpeg" className='w-full fixed top-0 left-0 opacity-5'/>
+        <img src="/logo.png" className='w-full fixed top-0 left-0 opacity-5'/>
 
 
            <div className='loginBox card w-[600px] h-[auto] pb-20 mx-auto pt-20 relative z-50'>

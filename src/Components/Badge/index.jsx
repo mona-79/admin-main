@@ -6,6 +6,7 @@ import React from 'react'
          ${props.status === "pending" && 'bg-primary text-white'}
          ${props.status === "confirm" && 'bg-green-500 text-white'}
          ${props.status === "delivered" && 'bg-green-700 text-white'}`}>
+       
         {props.status}</span>
   )
 }

@@ -27,21 +27,21 @@ import { FaRegEyeSlash } from "react-icons/fa6";
     <section className=' bg-white w-full  '>
         <header className='w-full fixed top-0 left-0 px-4 py-3 flex items-start justify-between z-50'>
             <Link to= "/">
-            <img src="/tikishnutra_resized.jpeg" className='w-[200px]'/></Link>
+            <img src="/logo.png" className='w-[200px]'/></Link>
        
        <div className='flex items-center gap-0'>
         <NavLink to="/login" exact={true} activeClassName="isActive">
-        <button className='!rounded-full !text-[rgba(0,0,0,0.8)] !px-5 py-2 flex gap-1 hover:bg-gray-200 transition-all duration-200'>
-            <CgLogIn className='text-[18px]'/>Login</button>
+        <Button className='!rounded-full !text-[rgba(0,0,0,0.8)] !px-5 py-2 flex gap-1 hover:bg-gray-200 transition-all duration-200'>
+            <CgLogIn className='text-[18px]'/>Login</Button>
             </NavLink>
          <NavLink to="/sign-up" exact={true} activeClassName="isActive">
-                <button className='!rounded-full !text-[rgba(0,0,0,0.8)] !px-5 py-2 flex gap-1 hover:bg-gray-200 transition-all duration-200'>
-                    <FaRegUser className='text-[15px]'/>Sign Up</button>
+                <Button className='!rounded-full !text-[rgba(0,0,0,0.8)] !px-5 py-2 flex gap-1 hover:bg-gray-200 transition-all duration-200'>
+                    <FaRegUser className='text-[15px]'/>Sign Up</Button>
                     </NavLink>
             
             </div>
         </header>
-        <img src="/tikishnutra_resized.jpeg" className='w-full fixed top-0 left-0 opacity-5'/>
+        <img src="/logo.png" className='w-full fixed top-0 left-0 opacity-5'/>
 
 
            <div className='loginBox card w-[600px] h-[auto] pb-20 mx-auto pt-20 relative z-50'>
